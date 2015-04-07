@@ -1,0 +1,105 @@
+{
+    "links": [{
+        "source": "Watch",
+        "target": "Phone",
+        "proportions": [{
+            "name": "walking",
+            "value": 61
+        }],
+        "targetContext": [
+            [{
+                "name": "walking",
+                "y": 4
+            }],
+            [{
+                "name": "on foot",
+                "y": 12
+            }],
+            [{
+                "name": "still",
+                "y": 45
+            }]
+        ]
+
+    }, {
+        "source": "Watch",
+        "target": "Phone",
+        "proportions": [{
+            "name": "on foot",
+            "value": 35
+        }],
+        "targetContext": [
+            [{
+                "name": "walking",
+                "y": 5
+            }],
+            [{
+                "name": "on foot",
+                "y": 15
+            }],
+            [{
+                "name": "still",
+                "y": 15
+            }]
+        ]
+    }, {
+        "source": "Watch",
+        "target": "Phone",
+        "proportions": [{
+            "name": "still",
+            "value": 10
+        }],
+        "targetContext": [
+            [{
+                "name": "still",
+                "y": 10
+            }]
+            
+        ]
+    }, {
+        "source": "Watch",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "on foot",
+            "value": 10
+        }],
+        "targetContext": [
+            [{
+                "name": "unknown",
+                "y": 5
+            }],
+            [{
+                "name": "still",
+                "y": 5
+            }]
+        ]
+    }, {
+        "source": "Watch",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "walking",
+            "value": 13
+        }],
+        "targetContext": [
+            [{
+                "name": "tilting",
+                "y": 10
+            }],
+            [{
+                "name": "still",
+                "y": 3
+            }]
+        ]
+    }],
+
+    "nodes": [{
+        "name": "Tablet"
+
+    }, {
+        "name": "Phone"
+
+    }, {
+        "name": "Watch"
+
+    }]
+}

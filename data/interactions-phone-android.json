@@ -1,0 +1,104 @@
+{
+    "links": [{
+        "source": "Phone",
+        "target": "Watch",
+        "proportions": [{
+            "name": "MainActivity",
+            "value": 62
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "y": 28
+            }],
+            [{
+                "name": "OpenListActivity",
+                "y": 20
+            }],
+            [{
+                "name": "PAUSE",
+                "y": 12
+            }]
+        ]
+
+    }, {
+        "source": "Phone",
+        "target": "Watch",
+        "proportions": [{
+            "name": "OpenListActivity",
+            "value": 40
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "y": 20
+            }],
+            [{
+                "name": "OpenListActivity",
+                "y": 20
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "OpenListActivity",
+            "value": 10
+        }],
+        "targetContext": [
+            [{
+                "name": "OpenListActivity",
+                "y": 5
+            }],
+            [{
+                "name": "MainActivity",
+                "y": 5
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "MainActivity",
+            "value": 16
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "y": 17
+            }],
+            [{
+                "name": "OpenListActivity",
+                "y": 3
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "SettingsActivity",
+            "value": 40
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "y": 35
+            }],
+            [{
+                "name": "SettingsActivity",
+                "y": 5
+            }]
+        ]
+    }],
+
+    "nodes": [{
+        "name": "Phone"
+
+    }, {
+        "name": "Tablet"
+
+    }, {
+        "name": "Watch"
+
+    }]
+}

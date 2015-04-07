@@ -1,0 +1,125 @@
+{
+    "links": [{
+        "source": "Phone",
+        "target": "Watch",
+        "proportions": [{
+            "name": "walking",
+            "value": 78
+        }],
+        "targetContext": [
+            [{
+                "name": "walking",
+                "y": 28
+            }],
+            [{
+                "name": "on foot",
+                "y": 40
+            }],
+            [{
+                "name": "still",
+                "y": 10
+            }]
+        ]
+
+    }, {
+        "source": "Phone",
+        "target": "Watch",
+        "proportions": [{
+            "name": "on foot",
+            "value": 40
+        }],
+        "targetContext": [
+            [{
+                "name": "walking",
+                "y": 20
+            }],
+            [{
+                "name": "on foot",
+                "y": 15
+            }],
+            [{
+                "name": "still",
+                "y": 5
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Watch",
+        "proportions": [{
+            "name": "still",
+            "value": 25
+        }],
+        "targetContext": [
+            [{
+                "name": "walking",
+                "y": 20
+            }],
+            [{
+                "name": "still",
+                "y": 5
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "on foot",
+            "value": 10
+        }],
+        "targetContext": [
+            [{
+                "name": "unknown",
+                "y": 5
+            }],
+            [{
+                "name": "still",
+                "y": 5
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "walking",
+            "value": 16
+        }],
+        "targetContext": [
+            [{
+                "name": "on foot",
+                "y": 17
+            }],
+            [{
+                "name": "still",
+                "y": 3
+            }]
+        ]
+    }, {
+        "source": "Phone",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "still",
+            "value": 40
+        }],
+        "targetContext": [
+            [{
+                "name": "still",
+                "y": 35
+            }],
+            [{
+                "name": "on foot",
+                "y": 5
+            }]
+        ]
+    }],
+
+    "nodes": [{
+        "name": "Watch"
+
+    }, {
+        "name": "Phone"
+
+    }, {
+        "name": "Tablet"
+
+    }]
+}

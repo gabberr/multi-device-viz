@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sankey diagram device switching</title>
+    <!--<style type="text/css" src="css/style.css"></style>-->
+    <!--<link rel="stylesheet" type="text/css" href="css/style-force-oriented.css">-->
+    <link rel="stylesheet" type="text/css" href="css/style-sankey.css">
+
+</head>
+<body>
+<h1>Device switching analysis</h1>
+<label for="showNameCheckbox">Show device names:</label>
+<input id="showNameCheckbox" type="checkbox" checked onchange="showDeviceNames(this);"/> <br>
+
+<label for="showContextNamesCheckbox">Show context names:</label>
+<input id="showContextNamesCheckbox" type="checkbox" checked onchange="showContextNames(this);"/>
+<br>
+<div class="blockHolder">
+    <label for="device-1">Initial device: </label>
+    <select id="device-1" name="device" onchange="selectChanged(1)" >
+        <option value="phone" selected>Phone</option>
+        <option value="tablet">Tablet</option>
+        <option value="watch">Watch</option>
+    </select>
+
+    <label for="context-1">Context query:</label>
+    <select id="context-1" name="context" onchange="selectChanged(1)" >
+        <option selected value="user">User activity</option>
+        <option  value="android">Android Activities</option>
+    </select>
+
+    <div id="chart-1" class="chartHolder"></div>
+
+    </div>
+
+
+<div id="tooltipChart" class="hidden">
+    <h2>Title</h2>
+
+</div>
+
+
+
+
+<!--<div class="blockHolder">-->
+    <!--<label for="device-2">Initial device: </label>-->
+    <!--<select id="device-2" name="device" onchange="selectChanged(2)" >-->
+        <!--<option value="phone">Phone</option>-->
+        <!--<option value="tablet">Tablet</option>-->
+        <!--<option value="watch" selected>Watch</option>-->
+    <!--</select>-->
+
+    <!--<label for="context-2">Context query:</label>-->
+    <!--<select id="context-2" name="context" onchange="selectChanged(2)" >-->
+        <!--<option value="user" selected>User activity</option>-->
+        <!--<option value="android" >Android Activities</option>-->
+    <!--</select>-->
+
+    <!--<div id="chart-2" class="chartHolder"></div>-->
+<!--</div>-->
+
+
+
+<!--<div id="legendHolder">-->
+<!--<h2>Legend:</h2>-->
+
+
+        <!--<p><strong>Important Label Heading</strong></p>-->
+        <!--<p><span id="value">100</span>%</p>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div id="chartLegend"></div>-->
+<!--</div>-->
+
+
+    <!--<h2>Available devices</h2>-->
+    <!--<ul>-->
+        <!--<li>Phone</li>-->
+        <!--<li>Tablet</li>-->
+        <!--<li>Watch</li>-->
+    <!--</ul>-->
+
+    <!--<h2>Possible user activities</h2>-->
+    <!--<ul>-->
+        <!--<li>In vehicle</li>-->
+        <!--<li>On bicycle</li>-->
+        <!--<li>On foot</li>-->
+        <!--<li>Runing</li>-->
+        <!--<li>Still</li>-->
+        <!--<li>Tilting</li>-->
+        <!--<li>Unknown</li>-->
+        <!--<li>Walking</li>-->
+    <!--</ul>-->
+
+    <!--int	IN_VEHICLE	The device is in a vehicle, such as a car.-->
+    <!--int	ON_BICYCLE	The device is on a bicycle.-->
+    <!--int	ON_FOOT	The device is on a user who is walking or running.-->
+    <!--int	RUNNING	The device is on a user who is running.-->
+    <!--int	STILL	The device is still (not moving).-->
+    <!--int	TILTING	The device angle relative to gravity changed significantly.-->
+    <!--int	UNKNOWN	Unable to detect the current activity.-->
+    <!--int	WALKING	The device is on a user who is walking.-->
+
+</body>
+<!--<script src='./bower_components/d3/d3.min.js' type='text/javascript'></script>  -->
+<script type="text/javascript" src="d3/d3.js"></script>
+<script type="text/javascript" src="d3/sankey.js"></script>
+<script type="text/javascript" src="d3/sankey-context.js"></script>
+
+</html>

@@ -1,0 +1,67 @@
+{
+    "links": [{
+        "source": "Watch",
+        "target": "Phone",
+        "proportions": [{
+            "name": "MainActivity",
+            "value": 38
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "y": 28
+            }],
+            [{
+                "name": "OpenListActivity",
+                "y": 10
+            }]
+            
+        ]
+
+    }, {
+        "source": "Watch",
+        "target": "Phone",
+        "proportions": [{
+            "name": "OpenListActivity",
+            "value": 20
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "y": 10
+            }],
+            [{
+                "name": "OpenListActivity",
+                "y": 10
+            }]
+        ]
+    }, {
+        "source": "Watch",
+        "target": "Tablet",
+        "proportions": [{
+            "name": "OpenListActivity",
+            "value": 10
+        }],
+        "targetContext": [
+            [{
+                "name": "OpenListActivity",
+                "y": 5
+            }],
+            [{
+                "name": "MainActivity",
+                "y": 5
+            }]
+        ]
+    }],
+
+    "nodes": [{
+        "name": "Tablet"
+
+    }, {
+        "name": "Phone"
+
+    }, {
+        "name": "Watch"
+
+    }]
+}

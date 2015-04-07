@@ -1,0 +1,102 @@
+{
+    "links": [{
+        "source": "Tablet",
+        "target": "Phone",
+        "proportions": [{
+            "name": "still",
+            "value": 61
+        }],
+        "targetContext": [
+            [{
+                "name": "tilting",
+                "y": 11
+            }],
+            [{
+                "name": "still",
+                "y": 50
+            }]
+        ]
+
+    }, {
+        "source": "Tablet",
+        "target": "Phone",
+        "proportions": [{
+            "name": "on foot",
+            "value": 3
+        }],
+        "targetContext": [
+            [{
+                "name": "still",
+                "y": 3
+            }]
+        ]
+    }, {
+        "source": "Tablet",
+        "target": "Phone",
+        "proportions": [{
+            "name": "tilting",
+            "value": 32
+        }],
+        "targetContext": [
+            [{
+                "name": "tilting",
+                "y": 28
+            }],
+            [{
+                "name": "still",
+                "y": 4
+            }]
+            
+        ]
+    }, {
+        "source": "Tablet",
+        "target": "Watch",
+        "proportions": [{
+            "name": "still",
+            "value": 10
+        }],
+        "targetContext": [
+            [{
+                "name": "unknown",
+                "y": 5
+            }],
+            [{
+                "name": "still",
+                "y": 5
+            }]
+        ]
+    }, {
+        "source": "Tablet",
+        "target": "Watch",
+        "proportions": [{
+            "name": "tilting",
+            "value": 13
+        }],
+        "targetContext": [
+            [{
+                "name": "tilting",
+                "y": 7
+            }],
+            [{
+                "name": "still",
+                "y": 4
+            }]
+            ,
+            [{
+                "name": "unknown",
+                "y": 2
+            }]
+        ]
+    }],
+
+    "nodes": [{
+        "name": "Tablet"
+
+    }, {
+        "name": "Phone"
+
+    }, {
+        "name": "Watch"
+
+    }]
+}

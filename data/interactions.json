@@ -1,0 +1,177 @@
+{
+  "links": [{
+    "source": "INIT",
+    "target": "MainActivity",
+    "type": "as",
+    "proportions": [{
+      "group": 1,
+      "value": 75
+    }, {
+      "group": 2,
+      "value": 75
+    }, {
+      "group": 3,
+      "value": 30
+    }]
+  },
+  {
+    "source": "MainActivity",
+    "target": "OpenListActivity",
+    "type": "a",
+    "proportions": [{
+      "group": 1,
+      "value": 35
+    }, {
+      "group": 2,
+      "value": 40
+    }, {
+      "group": 0,
+      "value": 22
+    }]
+  },
+  {
+    "source": "MainActivity",
+    "target": "Sync",
+    "type": "b",
+    "proportions": [{
+      "group": 1,
+      "value": 6
+    }, {
+      "group": 2,
+      "value": 8
+    }]
+  },
+  {
+    "source": "MainActivity",
+    "target": "AddList",
+    "type": "c",
+    "proportions": [{
+      "group": 1,
+      "value": 5
+    }, {
+      "group": 2,
+      "value": 0
+    }]
+  },
+  {
+    "source": "MainActivity",
+    "target": "RemoveList",
+    "type": "h",
+    "proportions": [{
+      "group": 1,
+      "value": 6
+    }, {
+      "group": 2,
+      "value": 0
+    }]
+  },
+  {
+    "source": "OpenListActivity",
+    "target": "TickItem",
+    "type": "d",
+    "proportions": [{
+      "group": 1,
+      "value": 22
+    }, {
+      "group": 2,
+      "value": 40
+    }, {
+      "group": 3,
+      "value": 13
+    }]
+  },
+  {
+    "source": "OpenListActivity",
+    "target": "AddItem",
+    "type": "e",
+    "proportions": [{
+      "group": 1,
+      "value": 25
+    }, {
+      "group": 2,
+      "value": 0
+    }]
+  },
+  {
+    "source": "OpenListActivity",
+    "target": "RemoveItem",
+    "type": "f",
+    "proportions": [{
+      "group": 1,
+      "value": 7
+    }, {
+      "group": 2,
+      "value": 0
+    }]
+  },
+  {
+    "source": "OpenListActivity",
+    "target": "RenameItem",
+    "type": "g",
+    "proportions": [{
+      "group": 1,
+      "value": 5
+    }, {
+      "group": 3,
+      "value": 0
+    }, {
+      "group": 3,
+      "value": 13
+    }]
+  },
+  {
+    "source": "OpenListActivity",
+    "target": "Sync",
+    "type": "h",
+    "proportions": [{
+      "group": 1,
+      "value": 12
+    }, {
+      "group": 2,
+      "value": 13
+    }]
+  },
+  {
+    "source": "OpenListActivity",
+    "target": "MainActivity",
+    "type": "i",
+    "proportions": [{
+      "group": 1,
+      "value": 31
+    }, {
+      "group": 2,
+      "value": 25
+    }]
+  }],
+
+"nodes": [{
+  "name": "INIT"
+
+}, {
+  "name": "MainActivity"
+
+}, {
+  "name": "OpenListActivity"
+
+}, {
+  "name": "Sync"
+
+}, {
+  "name": "TickItem"
+
+}, {
+  "name": "AddItem"
+
+}, {
+  "name": "RemoveItem"
+
+}, {
+  "name": "RenameItem"
+
+}, {
+  "name": "AddList"
+
+}, {
+  "name": "RemoveList"
+}]
+}
