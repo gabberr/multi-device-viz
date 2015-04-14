@@ -562,30 +562,27 @@ d3.sankey = function() {
   function center(node) {
     return node.y + node.dy / 2;
   }
- 
-  function getLinkValue(link) {
-	var sum = 0;
-    if(link.proportions === undefined)
-      debugger;
-  	link.proportions.forEach(function (p ){
-		sum+= p.value;
-  	});
-    if(link.context) {
-    link.context.forEach(function (p ){
-       sum+= p.value;
-    });
-    }
 
-
-
-  	return sum;
-
-  }
   function value(link) {
   	var value = getLinkValue(link);
     return value;
   }
+  function getLinkValue(link) {
+    var sum = 0;
+    if(link.proportions === undefined)
+      debugger;
+    link.proportions.forEach(function (p ){
+      sum+= p.value;
+    });
+    if(link.context) {
+      link.context.forEach(function (p ){
+        sum+= p.value;
+      });
+    }
 
+    return sum;
+
+  }
  
   return sankey;
 };

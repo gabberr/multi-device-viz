@@ -2,7 +2,7 @@
 body {
     background: rgb(244, 253, 255);
     margin: 20px;
-    color: #141412;
+    color: #292f33;
     font-family: "Source Sans Pro", Helvetica, sans-serif;
     text-rendering: optimizeLegibility;
     line-height: 1.5;
@@ -28,19 +28,22 @@ div.blockHolder:first-of-type {
     border-right: 1px solid #cccccc;
 }
 
-
-.node {
-    opacity:0.8;
+.node rect{
+    opacity:0.95;
+    stroke-width: 2;
+    stroke: #f1f6ff;
+    shape-rendering: crispEdges;
 }
 .node:hover{
     opacity:1;
 }
 path.link:hover {
+    stroke: #bfcad1;
     opacity: 1;
 }
 
 path.link {
-    opacity: 0.4;
+    opacity: 1  ;
     fill: none;
 }
 
@@ -51,7 +54,8 @@ path.selectedLink {
 text {
     font: 14px sans-serif;
     pointer-events: none;
-    text-shadow: 0 1px 0 #ddd, 1px 0 0 #ddd, 0 -1px 0 #ddd, -1px 0 0 #ddd;
+
+    text-shadow: 0 1px 0 #fff;
 }
 div#chartLegend {
     clear:left;
@@ -61,14 +65,16 @@ div#chartLegend {
 }
 #legendHolder {
     float:left;
-min-width: 510px;
+    min-width: 510px;
     padding: 10px;
 }
 
 #tooltipChart {
-    /*position: absolute;*/
+    visibility: hidden;
+    position: absolute;
+    opacity: 0.95;
     float: left;
-    width: 200px;
+    width: 250px;
     height: auto;
     padding: 10px;
     background-color: white;

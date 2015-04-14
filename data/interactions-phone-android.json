@@ -1,7 +1,7 @@
 {
     "links": [{
-        "source": "Phone",
-        "target": "Watch",
+        "source": "Phone 1",
+        "target": "Watch 1",
         "proportions": [{
             "name": "MainActivity",
             "value": 62
@@ -9,38 +9,38 @@
         "targetContext": [
             [{
                 "name": "MainActivity",
-                "y": 28
+                "value": 28
             }],
             [{
                 "name": "OpenListActivity",
-                "y": 20
+                "value": 22
             }],
             [{
                 "name": "PAUSE",
-                "y": 12
+                "value": 12
             }]
         ]
 
     }, {
-        "source": "Phone",
-        "target": "Watch",
+        "source": "Phone 1",
+        "target": "Watch 1",
         "proportions": [{
             "name": "OpenListActivity",
-            "value": 40
+            "value": 34
         }],
         "targetContext": [
             [{
                 "name": "MainActivity",
-                "y": 20
+                "value": 14
             }],
             [{
                 "name": "OpenListActivity",
-                "y": 20
+                "value": 20
             }]
         ]
     }, {
-        "source": "Phone",
-        "target": "Tablet",
+        "source": "Phone 1",
+        "target": "Tablet 1",
         "proportions": [{
             "name": "OpenListActivity",
             "value": 10
@@ -48,16 +48,16 @@
         "targetContext": [
             [{
                 "name": "OpenListActivity",
-                "y": 5
+                "value": 5
             }],
             [{
                 "name": "MainActivity",
-                "y": 5
+                "value": 5
             }]
         ]
     }, {
-        "source": "Phone",
-        "target": "Tablet",
+        "source": "Phone 1",
+        "target": "Tablet 1",
         "proportions": [{
             "name": "MainActivity",
             "value": 16
@@ -65,40 +65,149 @@
         "targetContext": [
             [{
                 "name": "MainActivity",
-                "y": 17
+                "value": 17
             }],
             [{
                 "name": "OpenListActivity",
-                "y": 3
+                "value": 3
             }]
         ]
     }, {
-        "source": "Phone",
-        "target": "Tablet",
+        "source": "Phone 1",
+        "target": "Tablet 1",
         "proportions": [{
             "name": "SettingsActivity",
-            "value": 40
+            "value": 10
         }],
         "targetContext": [
             [{
                 "name": "MainActivity",
-                "y": 35
+                "value": 6
             }],
             [{
                 "name": "SettingsActivity",
-                "y": 5
+                "value": 4
             }]
         ]
-    }],
+    }, {
+        "source": "Watch 1",
+        "target": "Phone 2",
+        "proportions": [{
+            "name": "OpenListActivity",
+            "value": 61
+        }],
+        "targetContext": [
+            [{
+                "name": "MainActivity",
+                "value": 30
+            }],
+            [{
+                "name": "OpenListActivity",
+                "value": 21
+            }]
+        ]
+    }, {
+      "source": "Watch 1",
+      "target": "Phone 2",
+      "proportions": [{
+        "name": "MainActivity",
+        "value": 22
+      }],
+      "targetContext": [
+        [{
+          "name": "MainActivity",
+          "value": 10
+        }],
+        [{
+          "name": "OpenListActivity",
+          "value": 12
+        }]
+      ]
+    }, {
+      "source": "Watch 1",
+      "target": "Tablet 2",
+      "proportions": [{
+        "name": "OpenListActivity",
+        "value": 5
+      }],
+      "targetContext": [
+        [{
+          "name": "MainActivity",
+          "value": 2
+        }],
+        [{
+          "name": "OpenListActivity",
+          "value": 3
+        }]
+      ]
+    }, {
+      "source": "Phone 2",
+      "target": "Watch 3",
+      "proportions": [{
+        "name": "MainActivity",
+        "value": 10
+      }],
+      "targetContext": [
+        [{
+          "name": "MainActivity",
+          "value": 5
+        }],
+        [{
+          "name": "OpenListActivity",
+          "value": 5
+        }]
+      ]
+    }, {
+      "source": "Phone 2",
+      "target": "Tablet 3",
+      "proportions": [{
+        "name": "MainActivity",
+        "value": 2
+      }],
+      "targetContext": [
+        [{
+          "name": "MainActivity",
+          "value": 1
+        }],
+        [{
+          "name": "OpenListActivity",
+          "value": 1
+        }]
+      ]
+    }
+    ],
 
     "nodes": [{
-        "name": "Phone"
+        "name": "Phone 1",
+      "xpos" : 0
 
     }, {
-        "name": "Tablet"
+        "name": "Tablet 1",
+      "xpos" : 1
 
     }, {
-        "name": "Watch"
+        "name": "Watch 1",
+      "xpos" : 1
 
-    }]
+    }, {
+        "name": "Phone 2",
+      "xpos" : 2
+    }, {
+      "name": "Watch 2",
+      "xpos" : 2
+    }
+    , {
+        "name": "Tablet 2",
+        "xpos" : 2
+      }
+    , {
+      "name": "Phone 3",
+    "xpos" : 3
+     }, {
+   "name": "Tablet 3",
+      "xpos" : 3
+}, {
+        "name": "Watch 3",
+        "xpos" : 3
+      }]
 }
