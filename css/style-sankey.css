@@ -36,6 +36,7 @@ div.blockHolder:first-of-type {
 }
 .node:hover{
     opacity:1;
+    cursor: pointer;
 }
 path.link:hover {
     stroke: #bfcad1;
@@ -45,10 +46,12 @@ path.link:hover {
 path.link {
     opacity: 1  ;
     fill: none;
+
 }
 
 path.selectedLink {
     opacity: 1;
+
 }
 
 text {
@@ -91,6 +94,9 @@ div#chartLegend {
 }
 #tooltipChart.hidden {
     /*display: none;*/
+}
+#tooltipChart text {
+    font-size: 14px;
 }
 
 #tooltipChart p {

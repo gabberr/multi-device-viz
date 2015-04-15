@@ -5,10 +5,8 @@
 var colorNodes = d3.scale.category10();
 var colorLinks = d3.scale.category20c();
 
-
-
-var showDeviceText=true;
-var showContextText=true;
+var showDeviceText = true;
+var showContextText = true;
 
 var dataZero;
 
@@ -40,39 +38,35 @@ var androidActivities = [{
 }, {
     name: "SettingsActivity"
 }, {
-    name: "PAUSED"
+    name: "PAUSE"
 }
 ];
 
 
-
-
-
 var colorLinks = d3.scale.ordinal()
     .domain(["MainActivity", "OpenListActivity", "SettingsActivity"])
-    .range(colorbrewer.Greens[5]);
+    .range(colorbrewer.Blues[5]);
 
 function selectChanged(i) {
-    var deviceSelect = document.getElementById("device-"+i);
-    var contextSelect = document.getElementById("context-"+i);
+    var deviceSelect = document.getElementById("device-" + i);
+    var contextSelect = document.getElementById("context-" + i);
 
     var device = deviceSelect.options[deviceSelect.selectedIndex].value;
     var context = contextSelect.options[contextSelect.selectedIndex].value;
 
     //createSankey("data/interactions-phone-android.json" , "#chart-1");
-    var dataPath= "data/interactions-"+ device +"-"+ context +".json";
+    var dataPath = "data/interactions-" + device + "-" + context + ".json";
 
-    d3.select("#chart-"+i).selectAll("*").remove();
-    createSankey(dataPath, "#chart-"+i);
+    d3.select("#chart-" + i).selectAll("*").remove();
+    createSankey(dataPath, "#chart-" + i);
 }
 
 function refreshText() {
-    //debugger;
-    var t1 =d3.selectAll("text.node-name")
+
+    var t1 = d3.selectAll("text.node-name")
         .classed("hidden", !showDeviceText);
 
-
-    var t2 =d3.selectAll("text.context-name")
+    var t2 = d3.selectAll("text.context-name")
         .classed("hidden", !showContextText);
 }
 
@@ -149,9 +143,8 @@ function createSankey(jsonPath, targetElementId) {
 
         data = updateData(data);
         /**
-         * Stores link sum to target state, adds sourceId and targe id properties to links
+         * Stores link sum to target state, adds sourceId and target id properties to links
          */
-
         function updateData(data) {
             for (var i = data.nodes.length - 1; i >= 0; i--) {
                 var stateName = data.nodes[i].name;
@@ -184,7 +177,7 @@ function createSankey(jsonPath, targetElementId) {
                 //  }
 
             }
-        return data;
+            return data;
         }
 
 
@@ -201,43 +194,43 @@ function createSankey(jsonPath, targetElementId) {
             var targetLinks = nodeB.targetLinks;
 
             var isConnected = false;
-            sourceLinks.forEach(function(el) {
-                if(el.source.name == nodeA.name)
+            sourceLinks.forEach(function (el) {
+                if (el.source.name == nodeA.name)
                     isConnected = true;
-                if(el.target.name == nodeA.name)
-                    isConnected = true;
-            });
-
-            targetLinks.forEach(function(el) {
-                if(el.source.name == nodeA.name)
-                    isConnected = true;
-                if(el.target.name == nodeA.name)
+                if (el.target.name == nodeA.name)
                     isConnected = true;
             });
 
-            var remainingNodes=[],
-                nextNodes=[];
+            targetLinks.forEach(function (el) {
+                if (el.source.name == nodeA.name)
+                    isConnected = true;
+                if (el.target.name == nodeA.name)
+                    isConnected = true;
+            });
+
+            var remainingNodes = [],
+                nextNodes = [];
             var traverse = [
-            //    {
-            //    linkType : "targetLinks",
-            //    nodeType : "source"
-            //},
+                //    {
+                //    linkType : "targetLinks",
+                //    nodeType : "source"
+                //},
                 {
-                linkType : "sourceLinks",
-                nodeType : "target"
-            }];
+                    linkType: "sourceLinks",
+                    nodeType: "target"
+                }];
 
-            traverse.forEach(function(step){
-                nodeB[step.linkType].forEach(function(link) {
+            traverse.forEach(function (step) {
+                nodeB[step.linkType].forEach(function (link) {
                     remainingNodes.push(link[step.nodeType]);
                 });
 
                 while (remainingNodes.length) {
                     nextNodes = [];
-                    remainingNodes.forEach(function(node) {
-                        node[step.linkType].forEach(function(link) {
+                    remainingNodes.forEach(function (node) {
+                        node[step.linkType].forEach(function (link) {
                             nextNodes.push(link[step.nodeType]);
-                            if(node.name == nodeA.name){
+                            if (node.name == nodeA.name) {
                                 // found a path to selected node
                                 isConnected = true;
                             }
@@ -250,21 +243,16 @@ function createSankey(jsonPath, targetElementId) {
 
         }
 
-        function drawPath(data, svg,  selectedNode) {
+        function drawPath(data, svg, selectedNode) {
 
             var node = svg.selectAll(".node rect")
-                .style( "visibility", function (d) {
-                    //debugger;
+                .style("visibility", function (d) {
                     return "hidden";
-
                 })
-
-
-                .filter(function(d) {
-                    var vale = areNodesConnected(selectedNode,d);
+                .filter(function (d) {
+                    var vale = areNodesConnected(selectedNode, d);
                     return vale;
                 })
-                //.transition()
                 .style("fill", function (d) {
                     return d.color = colorNodes(d.name.replace(/ .*/, ""));
                 })
@@ -273,28 +261,23 @@ function createSankey(jsonPath, targetElementId) {
                 });
 
             var nodeText = svg.selectAll(".node text")
-                .style( "visibility", function (d) {
-
+                .style("visibility", function (d) {
                     return "hidden";
                 })
-                .filter(function(d) {
-                    var vale = areNodesConnected(selectedNode,d);
+                .filter(function (d) {
+                    var vale = areNodesConnected(selectedNode, d);
                     return vale;
                 })
-                .style( "visibility", function (d) {
-                    //debugger;
+                .style("visibility", function (d) {
                     return "visible";
-
                 })
-
 
 
             var linkPath = svg.selectAll(".link")
-                .style( "visibility", function (d) {
+                .style("visibility", function (d) {
                     return "hidden";
                 })
-                .filter(function(d) {
-                    //debugger;
+                .filter(function (d) {
                     var vale = areNodesConnected(selectedNode, d.target);
                     return vale;
                 })
@@ -303,10 +286,10 @@ function createSankey(jsonPath, targetElementId) {
                 });
 
             var linkText = svg.selectAll(".textpath")
-                .style( "visibility", function (d) {
+                .style("visibility", function (d) {
                     return "hidden";
                 })
-                .filter(function(d) {
+                .filter(function (d) {
                     //debugger;
                     var vale = areNodesConnected(selectedNode, d.target);
                     return vale;
@@ -315,101 +298,102 @@ function createSankey(jsonPath, targetElementId) {
                     return "visible";
                 });
 
-
             var pi = Math.PI;
 
             var arc = d3.svg.arc()
                 .innerRadius(0)
-                .outerRadius(function(d) {
-                    var sum = d3.sum(d.sourceLinks, function(d) {
+                .outerRadius(function (d) {
+                    var sum = d3.sum(d.sourceLinks, function (d) {
                         return d.proportions[0].value;
                     })
 
                     return 10;
-                    var stroke = ( d.dy - ( sum * d.dy / d.value) ) ;
+                    var stroke = ( d.dy - ( sum * d.dy / d.value) );
                     return stroke;
 
                 })
-                .startAngle(0 * (pi/180)) //converting from degs to radians
-                .endAngle(pi/2) // 1/4 of a circle - 90 degrees
+                .startAngle(0 * (pi / 180)) //converting from degs to radians
+                .endAngle(pi / 2) // 1/4 of a circle - 90 degrees
 
-            var dropOffs =  svg.selectAll(".dropoff-arc")
-                .style( "visibility", function (d) {
+            var dropOffs = svg.selectAll(".dropoff-arc")
+                .style("visibility", function (d) {
                     return "hidden";
                 })
-                .filter(function(d) {
+                .filter(function (d) {
                     return areNodesConnected(selectedNode, d);
                 })
-                .filter(function(d) {
+                .filter(function (d) {
 
-                    var sum = d3.sum(d.sourceLinks, function(d) {
+                    var sum = d3.sum(d.sourceLinks, function (d) {
                         return d.proportions[0].value;
                     })
-                    return d.value >0 && (d.value - sum )> 1 ;
+                    return d.value > 0 && (d.value - sum ) > 1;
                 })
                 .attr("fill", function (d, i) {
                     return "red";
                 })
                 .attr("opacity", 0.5)
                 .attr("d", arc)
-                .attr("transform", function(d) {
+                .attr("transform", function (d) {
 
 
-                    var sum = d3.sum(d.sourceLinks, function(d) {
+                    var sum = d3.sum(d.sourceLinks, function (d) {
                         return d.proportions[0].value;
                     })
 
-                    var stroke = ( d.dy - ( sum * d.dy / d.value) ) ;
+                    var stroke = ( d.dy - ( sum * d.dy / d.value) );
                     var x0 = d.x + d.dx
-                        y0 = d.y + d.dy - stroke + 10;
+                    y0 = d.y + d.dy - stroke + 10;
 
-                    return "translate(" +x0 + ","+ y0+" )";
+                    return "translate(" + x0 + "," + y0 + " )";
 
                 }).style("visibility", function (d) {
                     return "visible";
                 });
 
-            var dropOffLines =  svg.selectAll(".dropoffline")
-                .style( "visibility", function (d) {
+            var dropOffLines = svg.selectAll(".dropoffline")
+                .style("visibility", function (d) {
                     return "hidden";
                 })
-                .filter(function(d) {
+                .filter(function (d) {
                     var vale = areNodesConnected(selectedNode, d);
                     return vale;
                 })
-                .filter(function(d) {
-                    var sum = d3.sum(d.sourceLinks, function(d) {
+                .filter(function (d) {
+                    var sum = d3.sum(d.sourceLinks, function (d) {
                         return d.proportions[0].value;
                     })
-                    return d.value >0 && (d.value - sum )> 1 ;
+                    return d.value > 0 && (d.value - sum ) > 1;
                 })
                 .attr("opacity", 0.5)
                 .attr("stroke-width", 10)
-                .attr("stroke", "red")
-                .attr("x1", function(d) {
+                .attr("stroke", "url(#line-gradient)")
+                .attr("x1", function (d) {
                     var x0 = d.x + d.dx + 5;
-                    return   x0;
+                    return x0;
                 })
-                .attr("y1", function(d) {
-                    var sum = d3.sum(d.sourceLinks, function(d) { return d.proportions[0].value;});
-                    var stroke = ( d.dy - ( sum * d.dy / d.value) ) ;
+                .attr("y1", function (d) {
+                    var sum = d3.sum(d.sourceLinks, function (d) {
+                        return d.proportions[0].value;
+                    });
+                    var stroke = ( d.dy - ( sum * d.dy / d.value) );
                     var y1 = d.y + d.dy - stroke + 10;
                     return y1;
                 })
-                .attr("x2", function(d) {
-                    var x0 = d.x + d.dx + 5;;
-                    return   x0;
+                .attr("x2", function (d) {
+                    var x0 = d.x + d.dx + 5;
+                    ;
+                    return x0;
                 })
-                .attr("y2", function(d) {
+                .attr("y2", function (d) {
                     var y1 = d.y + d.dy;
                     return y1;
                 })
-                .style( "visibility", function (d) {
+                .style("visibility", function (d) {
                     return "visible";
                 })
 
         }
-
 
         function drawSankey(data, svg) {
 
@@ -425,7 +409,9 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("class", function (d) {
                     return "link " + d.proportions[0].name;
                 })
-                .attr("id", function (d,i) { return "path_" + i; })
+                .attr("id", function (d, i) {
+                    return "path_" + i;
+                })
                 .attr("d", path)
                 .style("stroke-width", function (d) {
                     return Math.max(1, d.dy);
@@ -449,28 +435,50 @@ function createSankey(jsonPath, targetElementId) {
                     //return "Context: " + d.proportions[0].name + " " + d.source.name + " → " + d.target.name + "\n" + format(d.proportions[0].value);
                     return format(d.proportions[0].value);
                 })
-                .attr("xlink:href", function (d,i) { return "#path_" + i; });
+                .attr("xlink:href", function (d, i) {
+                    return "#path_" + i;
+                });
 
 
-
-            var dropOffs =  svg.selectAll(".dropoff")
+            var dropOffs = svg.selectAll(".dropoff")
                 .data(data.nodes)
                 .enter()
                 .append("path")
                 .attr("class", "dropoff-arc");
 
 
-
-            var dropOfflines =  svg.selectAll(".dropofflines")
+            var dropOfflines = svg.selectAll(".dropofflines")
                 .data(data.nodes)
                 .enter()
                 .append("line")
-                .attr("class","dropoffline");
+                .attr("class", "dropoffline");
+
+            dropOfflines
+                .on("mouseover", function (d) {
+                    d3.select("#tooltipChart h2").html("Dropoff")
+                    showDropoff(d);
+                    d3.select("#tooltipChart")
+                        .style("visibility", "visible")
+                        .style("left", d3.event.pageX + "px")
+                        .style("top", d3.event.pageY + "px");
+
+                })
+                .on("mousemove", function () {
+                    return d3.select("#tooltipChart")
+                        .style("top",
+                        (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+                })
+                .on("mouseout", function () {
+                    return d3.select("#tooltipChart").style("visibility", "hidden");
+                });
+
 
             var node = svg.append("g").selectAll(".node")
                 .data(data.nodes)
                 .enter().append("g")
-                .attr("id", function (d,i) { return "node_" + i; })
+                .attr("id", function (d, i) {
+                    return "node_" + i;
+                })
                 .attr("class", "node")
                 .attr("transform", function (d) {
                     return "translate(" + d.x + "," + d.y + ")";
@@ -517,7 +525,7 @@ function createSankey(jsonPath, targetElementId) {
                     return 15;
                 })
                 .attr("y", function (d) {
-                    return d.dy/2;
+                    return d.dy / 2;
                 })
                 .attr("text-anchor", "middle");
 
@@ -535,7 +543,7 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("text-anchor", "end")
                 .attr("transform", null)
                 .text(function (d) {
-                    return d.name;
+                    return d.name.replace(/ .*/, "");
                 })
                 .filter(function (d) {
                     return d.x < width / 2;
@@ -543,40 +551,35 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("x", 5 + sankey.nodeWidth())
                 .attr("text-anchor", "start");
 
-
-
             node
                 .on("click", function (d, index) {
-                   drawPath(data,svg,d);
+
+                    if (d.sourceLinks.length > 0)
+                        drawPath(data, svg, d);
 
                 });
-
-
-
-
-
 
 
             /**
              * Select single link with mouse and show stacked bar of target device context
              */
-            link
-                .on("click", function (d, index) {
-
-                    if (this.className.baseVal.indexOf("selectedLink") >= 0) {
-                        svg.selectAll(".link")
-                            .classed("selectedLink", false)
-                    } else {
-                        svg.selectAll(".link")
-                            .classed("selectedLink", function (d, i) {
-                                return index === i;
-                            })
-                    }
-
-                    showChartOnHover(d);
-                    refreshText();
-
-                });
+            //link
+            //.on("click", function (d, index) {
+            //
+            //    if (this.className.baseVal.indexOf("selectedLink") >= 0) {
+            //        svg.selectAll(".link")
+            //            .classed("selectedLink", false)
+            //    } else {
+            //        svg.selectAll(".link")
+            //            .classed("selectedLink", function (d, i) {
+            //                return index === i;
+            //            })
+            //    }
+            //
+            //    showChartOnHover(d);
+            //    refreshText();
+            //
+            //});
 
             /**
              * Shows link name on hover
@@ -584,22 +587,35 @@ function createSankey(jsonPath, targetElementId) {
             link
                 .on("mouseover", function (d) {
 
+
+                    d3.select("#tooltipChart h2").html("Target Android Activities from " + d.proportions[0].name);
                     showChartOnHover(d);
-                    //debugger;
                     d3.select("#tooltipChart")
                         .style("visibility", "visible")
                         .style("left", d3.event.pageX + "px")
                         .style("top", d3.event.pageY + "px");
 
-                    //tooltip
-                    //    .style("left", d3.event.pageX + "px")
-                    //    .style("top", d3.event.pageY + "px")
-                    //    .style("text-shadow", "0 1px 0 #ddd, 1px 0 0 #ddd, 0 -1px 0 #ddd, -1px 0 0 #ddd")
-                    //    .style("visibility", "visible")
-                    //    .style("font-size", "0.9em");
-                    //
-                    //tooltip
-                    //    .text(d.proportions[0].name + ": " + d.proportions[0].value);
+                })
+                .on("mousemove", function () {
+                    return d3.select("#tooltipChart")
+                        .style("top",
+                        (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
+                })
+                .on("mouseout", function () {
+                    return d3.select("#tooltipChart").style("visibility", "hidden");
+                });
+
+
+            node
+                .on("mouseover", function (d) {
+
+                    d3.select("#tooltipChart h2").html("Detected user activity");
+                    showActivitiesChartOnHover(d);
+                    d3.select("#tooltipChart")
+                        .style("visibility", "visible")
+                        .style("left", d3.event.pageX + "px")
+                        .style("top", d3.event.pageY + "px");
+
                 })
                 .on("mousemove", function () {
                     return d3.select("#tooltipChart")
@@ -661,9 +677,32 @@ function createSankey(jsonPath, targetElementId) {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var sankey = d3.sankey().nodeWidth(30).nodePadding(padding).size([width, height-100]);
+        var sankey = d3.sankey().nodeWidth(30).nodePadding(padding).size([width, height - 100]);
         var path = sankey.link();
 
+
+        var y = d3.scale.linear()
+            .range([200, 0]);
+
+        svg.append("defs")
+            .append("linearGradient")
+            .attr("id", "line-gradient")
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", 0).attr("y1", "0%")
+            .attr("x2", 0).attr("y2", "100%")
+            .selectAll("stop")
+            .data([
+                {offset: "0%", color: "red"},
+                {offset: "60%", color: "white"},
+                {offset: "100%", color: "white"}
+            ])
+            .enter().append("stop")
+            .attr("offset", function (d) {
+                return d.offset;
+            })
+            .attr("stop-color", function (d) {
+                return d.color;
+            });
 
 
         sankey
@@ -674,8 +713,6 @@ function createSankey(jsonPath, targetElementId) {
 
         drawSankey(data, svg, data.nodes[0]);
         drawPath(data, svg, data.nodes[0]);
-
-
 
 
         //showContextBar(data.links[0]);
@@ -692,7 +729,7 @@ function createSankey(jsonPath, targetElementId) {
         var svgChart = d3.select("#tooltipChart")
             .append("svg")
             .attr("width", 250)
-            .attr("height", 150);
+            .attr("height", 100);
 
         //var arcs = svgChart.append("g").selectAll("arcs.nodes")
         //    .data(data.links[0].targetContext)
@@ -701,42 +738,27 @@ function createSankey(jsonPath, targetElementId) {
 
         function showChartOnHover(link) {
 
-            //data.links = dataZero.links.filter(function(d) {
-            //        if(d.source==="Watch 1")
-            //            return d;
-            //    }
-            //)
-            ////debugger;
-            //data = updateData(data);
-            //sankey.links(data.links);
-            //sankey.relayout();
-
-
-
-            var sum = d3.sum(link.targetContext, function(a) {
+            var sum = d3.sum(link.targetContext, function (a) {
                 return a[0].value;
             });
 
             var yScale = d3.scale.linear()
                 .domain([0, sum])
-                .range([0, link.dy ]);
+                .range([0, link.dy]);
 
             var newdata = link.targetContext;
 
-            var newdata = newdata.map( function(obj) {
+            var newdata = newdata.map(function (obj) {
                 return obj[0];
             });
+
             svgChart.selectAll("*").remove();
-                //.style("left", d3.event.pageX + "px")
-                //.style("top", d3.event.pageY + "px");
-            //stack(newdata);
-            //
-            //groups
-            //    .remove();
 
             var pie = d3.layout.pie()
                 .sort(null)
-                .value(function(d) { return d.value; });
+                .value(function (d) {
+                    return d.value;
+                });
 
             /**
              * D3 arc helper for calculation of arcs parameters
@@ -750,26 +772,27 @@ function createSankey(jsonPath, targetElementId) {
                 .enter()
                 .append("g")
                 .attr("fill", "black")
-                .attr("r",  function (d) { return 20; } )
+                .attr("r", function (d) {
+                    return 20;
+                })
                 .attr("class", "arc")
-                .attr("transform", "translate(" + (40) + ", " + (40  )  + ")");
-
+                .attr("transform", "translate(" + (40) + ", " + (40  ) + ")");
 
 
             arcs.append("path")
-                .attr("fill", function(d) {
+                .attr("fill", function (d) {
                     return colorLinks(d.data.name);
                 })
                 .attr("d", arc);
 
             arcs.append("text")
-                .attr("transform", function(d) {
+                .attr("transform", function (d) {
                     return "translate(" + arc.centroid(d) + ")";
                 })
                 .attr("dy", ".35em")
                 .style("text-anchor", "middle")
-                .text(function(d) {
-                    return percentageFormat(d.value/sum);
+                .text(function (d) {
+                    return percentageFormat(d.value / sum);
                 });
 
             /**
@@ -783,7 +806,7 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("transform", function (d, i) {
 
                     d.x = 100,
-                    d.y = i * 20 + 10;
+                        d.y = i * 20 + 10;
                     return "translate(" + d.x + "," + d.y + ")";
                 });
 
@@ -808,92 +831,123 @@ function createSankey(jsonPath, targetElementId) {
                 });
 
 
-
-
-
-            //groups = svg.append("g").selectAll(".context")
-            //    .data(newdata)
-            //    .enter()
-            //    .append("g")
-            //    .on("mouseover", function (d) {
-            //        debugger;
-            //        tooltip
-            //            .style("left", d3.event.pageX + "px")
-            //            .style("top", d3.event.pageY + "px")
-            //            .style("text-shadow", "0 1px 0 #ddd, 1px 0 0 #ddd, 0 -1px 0 #ddd, -1px 0 0 #ddd")
-            //            .style("visibility", "visible")
-            //            .style("font-size", "0.9em");
-            //
-            //        tooltip
-            //            .text(d[0].name + ": " + d[0].y);
-            //    })
-            //    .on("mousemove", function () {
-            //        return tooltip.style("top",
-            //            (d3.event.pageY - 10) + "px").style("left", (d3.event.pageX + 10) + "px");
-            //    })
-            //    .on("mouseout", function () {
-            //        return tooltip.style("visibility", "hidden");
-            //    });
-
-            /**
-             * Stacked bar chart of contexts
-             */
-            //var rects = groups.selectAll("rect")
-            //    .data(function (d) {
-            //        return d;
-            //    })
-            //    .enter()
-            //    .append("rect")
-            //    .attr("fill", "white")
-            //    .transition()
-            //    .duration(500)
-            //    .attr("x", function (d, i) {
-            //        return link.target.x + 30;
-            //    })
-            //    .attr("y", function (d) {
-            //        return yScale(d.y0) + link.target.y + link.ty;
-            //    })
-            //    .attr("height", function (d) {
-            //        return yScale(d.y);
-            //    })
-            //    .attr("width", barWidth)
-            //    .sort(function (a, b) {
-            //        return b.dy - a.dy;
-            //    })
-            //    .style("fill", function (d, i) {
-            //        return colorLinks(d.name);
-            //    });
-
-
-            /**
-             * Displays context names in the stacked context bar chart
-             */
-            //var contextText = groups.selectAll("text")
-            //    .data(function (d) {
-            //        return d;
-            //    })
-            //    .enter()
-            //    .append("text")
-            //    .classed("context-name", true)
-            //    .attr("x", function (d, i) {
-            //        return link.target.x + 35;
-            //    })
-            //    .attr("fill", "black")
-            //    .attr("y", function (d) {
-            //        return yScale(d.y0) + 15 + link.target.y + link.ty;
-            //    })
-            //    .text(function (d) {
-            //        if(yScale(d.y) > 16)
-            //            return d.name + ": " + format(d.y);
-            //        else
-            //            return null;
-            //    });
-
         }
 
 
+        /**
+         * Shows activities pie chart at a node
+         * @param node
+         */
+
+        function showActivitiesChartOnHover(node) {
 
 
+            var sum = d3.sum(node.activities, function (a) {
+                return a.value;
+            });
+
+
+            var newdata = node.activities;
+            svgChart.selectAll("*").remove();
+
+            var pie = d3.layout.pie()
+                .sort(null)
+                .value(function (d) {
+                    return d.value;
+                });
+
+            /**
+             * D3 arc helper for calculation of arcs parameters
+             */
+            var arc = d3.svg.arc()
+                .outerRadius(40)
+                .innerRadius(0);
+
+            var arcs = svgChart.append("g").selectAll("arc.nodes")
+                .data(pie(newdata))
+                .enter()
+                .append("g")
+                .attr("fill", "black")
+                .attr("r", function (d) {
+                    return 20;
+                })
+                .attr("class", "arc")
+                .attr("transform", "translate(" + (40) + ", " + (40  ) + ")");
+
+
+            arcs.append("path")
+                .attr("fill", function (d) {
+                    return colorNodes(d.data.name);
+                })
+                .attr("d", arc);
+
+            arcs.append("text")
+                .attr("transform", function (d) {
+                    return "translate(" + arc.centroid(d) + ")";
+                })
+                .attr("dy", ".35em")
+                .style("text-anchor", "middle")
+                .text(function (d) {
+                    return percentageFormat(d.value / sum);
+                });
+
+            /**
+             * Legend for tooltip piechart
+             */
+            var legend = svgChart.append("g")
+                .selectAll("circle.legend")
+                .data(newdata)
+                .enter()
+                .append("g")
+                .attr("transform", function (d, i) {
+
+                    d.x = 100,
+                        d.y = i * 20 + 10;
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
+
+            legend.append("circle")
+                .attr("fill", function (d) {
+                    //debugger;
+                    return colorNodes(d.name);
+                })
+                .attr("r", function (d) {
+                    return 5;
+                });
+
+            legend.append("text")
+                .text(function (d) {
+                    return d.name + "(" + d.value + "/" + sum + ")";
+                })
+                .attr("x", function (d) {
+                    return 10;
+                })
+                .attr("y", function (d) {
+                    return 5;
+                });
+        }
+
+        function showDropoff(node) {
+
+            var sum = d3.sum(node.sourceLinks, function (a) {
+                return a.proportions[0].value;
+            });
+
+            var newdata = node.activities;
+            svgChart.selectAll("*").remove();
+
+            svgChart
+                .append("text")
+                .attr("height", "100px")
+                .attr("transform", function (d) {
+                    return "translate( 10 , 10)";
+                })
+                .attr("dy", ".35em")
+                .style("text-anchor", "middle")
+                .text(function (d) {
+                    return node.value-sum;
+                });
+        }
 
 
         var hideTooltip = function () {
@@ -921,7 +975,7 @@ function createSankey(jsonPath, targetElementId) {
 
 //createLegend("#chartLegend",devices, colorNodes);
 //createLegend("#chartLegend",userActivities, colorLinks);
-createLegend("#chartLegend",androidActivities, colorLinks);
-createSankey("data/interactions-phone-android.json" , "#chart-1");
+createLegend("#chartLegend", androidActivities, colorLinks);
+createSankey("data/interactions-phone-android.json", "#chart-1");
 //createSankey("data/interactions-watch-user.json" , "#chart-2");
 
