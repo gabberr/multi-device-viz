@@ -1,31 +1,54 @@
 
 body {
-    background: rgb(244, 253, 255);
+    background: rgb(250, 251, 255);
     margin: 20px;
     color: #292f33;
-    font-family: "Source Sans Pro", Helvetica, sans-serif;
+
+    font-family: 'Open Sans', sans-serif;
     text-rendering: optimizeLegibility;
     line-height: 1.5;
 }
 
 h1, h2 {
-    font-family: Bitter, Georgia, serif;
+    /*font-family: Bitter, Georgia, serif;*/
 
 }
 select {
     font-size: 2em;
     margin-right: 3em;
 }
+
+
+#matrix {
+    /*fill:blue;*/
+}
+#matrix text {
+    font-size: 70%;
+}
+#matrix line {
+    stroke:#fff;
+}
+text.active {
+    /*text-decoration: underline;*/
+    font-weight: 900;
+    /*fill:red;*/
+}
+.device-name {
+    font-size: 14px !important;
+}
+
+.background {
+    fill: #eee;
+}
+
 div.blockHolder    {
-    /*font: 15px sans-serif;*/
-    /*background-color: steelblue;*/
     float: left;
     min-width: 500px;
     padding: 10px;
 }
 div.blockHolder:first-of-type {
     padding-left: 0px;
-    border-right: 1px solid #cccccc;
+    /*border-right: 1px solid #cccccc;*/
 }
 
 .node rect{
@@ -38,20 +61,30 @@ div.blockHolder:first-of-type {
     opacity:1;
     cursor: pointer;
 }
-path.link:hover {
-    stroke: #bfcad1;
-    opacity: 1;
-}
+/*path.link:hover {*/
+    /*stroke: #bfcad1;*/
+    /*opacity: 1;*/
+/*}*/
 
 path.link {
     opacity: 1  ;
     fill: none;
 
 }
+.textpath {
+    font-size: 1.2em;
 
-path.selectedLink {
-    opacity: 1;
+}
+path.link:hover{
+    cursor: pointer;
+}
 
+/*path.selectedLink {*/
+    /*opacity: 1;*/
+
+/*}*/
+#select-device {
+    display: block;
 }
 
 text {
@@ -69,7 +102,7 @@ div#chartLegend {
 #legendHolder {
     float:left;
     min-width: 510px;
-    padding: 10px;
+    padding: 0px 10px;
 }
 
 #tooltipChart {
@@ -79,11 +112,11 @@ div#chartLegend {
     float: left;
     width: 250px;
     height: auto;
-    padding: 10px;
+    padding: 0px 10px 10px 10px;
     background-color: white;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
     -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
@@ -104,4 +137,15 @@ div#chartLegend {
     font-family: sans-serif;
     font-size: 16px;
     line-height: 20px;
+}
+
+#matrix-chart{
+    display: none;
+}
+#stacked-chart, #matrix-chart, #chart-1 {
+    border: 1px solid rgba(215, 212, 212, 0.69);
+    float: left;
+    background-color: rgba(224, 242, 244, 0.25);
+    margin-right: 10px;
+    padding: 0em 1em;
 }

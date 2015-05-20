@@ -104,6 +104,15 @@ d3.sankey = function() {
                 d3.sum(node.targetLinks, value)
             );
         });
+        //debugger;
+
+        /**
+         * Dropoff values have to be added to the root node, in order to adjust the size to include/show dropoffs
+         */
+        var sum = d3.sum(nodes[0].sourceLinks, function(el) {
+            return el.context[0].dropoffvalue;
+        });
+        nodes[0].value += sum;
     }
 
     // Iteratively assign the breadth (x-position) for each node.
@@ -297,6 +306,7 @@ d3.sankey = function() {
     }
 
     function center(node) {
+        //return 0;
         return node.y + node.dy / 2;
     }
 
@@ -306,17 +316,17 @@ d3.sankey = function() {
     }
     function getLinkValue(link) {
         var sum = 0;
-        if(link.proportions === undefined)
-            debugger;
-        link.proportions.forEach(function (p ){
-            sum+= p.value;
-        });
-        if(link.context) {
-            link.context.forEach(function (p ){
-                sum+= p.value;
-            });
-        }
 
+        // if its a link, return context value
+        if(link.id) {
+            //debugger;
+            return link.context[0].value;
+        }
+        // else its a node so return the sum
+
+        link.context.forEach(function (p ){
+            sum+= p.value ;
+        });
         return sum;
 
     }

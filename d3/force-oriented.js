@@ -114,11 +114,11 @@ var maxDomainValue = maxDomainState.proportions.reduce(add,0);
 var minDomainValue = minDomainState.proportions.reduce(add,0);
 
 var maxLinkValue = data.links.reduce(function(s1,s2){ 
-                      return s1.proportions.reduce(add,0) < s2.proportions.reduce(add,0) ? s2:s1;
-}).proportions.reduce(add,0);
+                      return s1.context.reduce(add,0) < s2.context.reduce(add,0) ? s2:s1;
+}).context.reduce(add,0);
 var minLinkValue = data.links.reduce(function(s1,s2){ 
-                      return s1.proportions.reduce(add,0) > s2.proportions.reduce(add,0) ? s2:s1;
-}).proportions.reduce(add,0);
+                      return s1.context.reduce(add,0) > s2.context.reduce(add,0) ? s2:s1;
+}).context.reduce(add,0);
 
 
 // set up scale so circles are not too small/big
@@ -166,11 +166,11 @@ var path = svg.append("g").selectAll("path")
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageY + "px")
               .style("display", "block");
-        var p = getProportions(d);
+        var p = getcontext(d);
 
-        for (var i = 0; i < d.proportions.length; i++) {
+        for (var i = 0; i < d.context.length; i++) {
            tooltip .select("#tooltip-"+(i+1))
-              .text(d.proportions[i].value);
+              .text(d.context[i].value);
           }    
         })
             .on("mouseout", function () {
@@ -179,7 +179,7 @@ var path = svg.append("g").selectAll("path")
 
 path.append("svg:title")
           .text(function(d, i) { 
-            var p = getProportions(d.target);
+            var p = getcontext(d.target);
             return [
             "Phone", p[0].value,
             "\nWatch",p[1].value
@@ -196,12 +196,12 @@ var markerPath = svg.append("svg:g").selectAll("path.marker")
               .style("left", d3.event.pageX + "px")
               .style("top", d3.event.pageY + "px")
               .style("display", "block");
-        var p = getProportions(d);
+        var p = getcontext(d);
 
 
-        for (var i = 0; i < d.proportions.length; i++) {
+        for (var i = 0; i < d.context.length; i++) {
            tooltip .select("#tooltip-"+(i+1))
-              .text(d.proportions[i].value);
+              .text(d.context[i].value);
         }
               
         })
@@ -264,7 +264,7 @@ legend.append("text")
 
  
 circle.each(function(d){
-    // var sum = getProportions(d).reduce(add, 0);
+    // var sum = getcontext(d).reduce(add, 0);
     var r = Math.sqrt(scale(calcRadius(d)));
 
     if(isNaN(r))
@@ -273,8 +273,8 @@ circle.each(function(d){
     d3.select(this)
     .selectAll("path")
         .data(function(d, i) {
-          var prop = getProportions(d);
-          return pie(getProportions(d)); })
+          var prop = getcontext(d);
+          return pie(getcontext(d)); })
     .enter().append("svg:path")
         .attr("d", 
           arc)
@@ -287,7 +287,7 @@ circle.each(function(d){
             .style("left", d3.event.pageX + "px")
             .style("top", d3.event.pageY + "px")
             .style("display", "block");
-      var p = getProportions(d);
+      var p = getcontext(d);
 
 
 
@@ -354,10 +354,10 @@ function tick() {
   text.attr("transform", transform);
 }
 
-function getProportions(d) {
+function getcontext(d) {
   for (var i = data.nodes.length - 1; i >= 0; i--) {
     if(data.nodes[i].name == d.name)
-      return data.nodes[i].proportions;
+      return data.nodes[i].context;
     
   }
   return 0;
@@ -366,7 +366,7 @@ function getLinkProportion(d) {
   for (var i = data.links.length - 1; i >= 0; i--) {
     if(data.links[i].source == d.source) {
       if(data.links[i].target == d.target){
-        return data.links[i].proportions;
+        return data.links[i].context;
       }  
     }
   }
@@ -385,7 +385,7 @@ function transform(d) {
   return "translate(" + d.x + "," + d.y + ")";
 }
 function calcRadius(d) {
-   var sum = getProportions(d).reduce(add, 0);
+   var sum = getcontext(d).reduce(add, 0);
    return sum;
 }
 
