@@ -16,6 +16,13 @@
 <!--<label for="showContextNamesCheckbox">Show context names:</label>-->
 <!--<input id="showContextNamesCheckbox" type="checkbox" checked onchange="showContextNames(this);"/>-->
 <!--<br>-->
+
+<div id="tooltipChart" class="hidden">
+    <h2>Target activites</h2>
+    <p></p>
+</div>
+
+
 <div class="blockHolder">
     <!--<label for="device-1">Initial device: </label>-->
     <!--<select id="device-1" name="device" onchange="selectChanged(1)" >-->
@@ -35,9 +42,6 @@
     </div>
 
 
-<div id="tooltipChart" class="hidden">
-    <h2>Target activites</h2>
-</div>
 
 
 <div id="stacked-chart">
@@ -45,8 +49,8 @@
     <label for="select-device">Device: </label>
     <select id="select-device" name="device" onchange="selectChanged()" >
     <option value="phone" selected>Phone</option>
-    <option value="tablet">Tablet</option>
-    <option value="watch">Watch</option>
+    <!--<option value="tablet">Tablet</option>-->
+    <!--<option value="watch">Watch</option>-->
     </select>
 
 </div>

@@ -3,333 +3,271 @@
     {
       "source": "Phone 1",
       "target": "Watch 1",
-      "proportions": [
+      "context": [
+        {
+          "name": "Walking",
+          "value": 50,
+          "dropoffvalue": 11
+        }
+      ],
+      "targetContext": [
+        {
+          "source": "MainActivity",
+          "target": "MainActivity",
+          "value": 23
+        },
+        {
+          "source": "MainActivity",
+          "target": "OpenListActivity",
+          "value": 14
+        },
+        {
+          "source": "MainActivity",
+          "target": "PAUSE",
+          "value": 8
+        },
+        {
+          "source": "OpenListActivity",
+          "target": "OpenListActivity",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "source": "Phone 1",
+      "target": "Watch 2",
+      "context": [
+        {
+          "name": "Still",
+          "value": 27,
+          "dropoffvalue": 7
+        }
+      ],
+      "targetContext": [
+        {
+          "source": "MainActivity",
+          "target": "MainActivity",
+          "value": 14
+        },
+        {
+          "source": "OpenListActivity",
+          "target": "MainActivity",
+          "value": 13
+        }
+      ]
+    },
+    {
+      "source": "Phone 1",
+      "target": "Tablet 1",
+      "context": [
+        {
+          "name": "Tilting",
+          "value": 10,
+          "dropoffvalue": 5
+        }
+      ],
+      "targetContext": [
+        {
+          "source": "OpenListActivity",
+          "target": "SettingsActivity",
+          "value": 5
+        },
+        {
+          "source": "MainActivity",
+          "target": "OpenListActivity",
+          "value": 5
+        }
+      ]
+    },
+    {
+      "source": "Phone 1",
+      "target": "Tablet 2",
+      "context": [
+        {
+          "name": "Still",
+          "value": 10,
+          "dropoffvalue": 5
+        }
+      ],
+      "targetContext": [
+        {
+          "source": "MainActivity",
+          "target": "MainActivity",
+          "value": 8
+        },
+        {
+          "source": "OpenListActivity",
+          "target": "OpenListActivity",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "source": "Phone 1",
+      "target": "Watch 4",
+      "context": [
+        {
+          "name": "On Foot",
+          "value": 10,
+          "dropoffvalue": 5
+        }
+      ],
+      "targetContext": [
         {
           "name": "MainActivity",
-          "value": 62
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 28
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 22
-          }
-        ],
-        [
-          {
-            "name": "PAUSE",
-            "value": 12
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Phone 1",
-      "target": "Watch 1",
-      "proportions": [
-        {
-          "name": "OpenListActivity",
-          "value": 34
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 14
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 20
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Phone 1",
-      "target": "Tablet 1",
-      "proportions": [
-        {
-          "name": "OpenListActivity",
-          "value": 10
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 5
-          }
-        ],
-        [
-          {
-            "name": "MainActivity",
-            "value": 5
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Phone 1",
-      "target": "Tablet 1",
-      "proportions": [
-        {
-          "name": "MainActivity",
-          "value": 16
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 17
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 3
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Phone 1",
-      "target": "Tablet 1",
-      "proportions": [
+          "value": 6
+        },
         {
           "name": "SettingsActivity",
+          "value": 4
+        }
+      ]
+    },
+    {
+      "source": "Watch 2",
+      "target": "Phone 2",
+      "context": [
+        {
+          "name": "On Foot",
+          "value": 18,
+          "dropoffvalue": 6
+        }
+      ],
+      "targetContext": [
+        {
+          "source": "OpenListActivity",
+          "target" : "MainActivity",
+          "value": 30
+        },
+        {
+          "source": "OpenListActivity",
+          "target" : "SettingsActivity",
+          "value": 21
+        }
+      ]
+    },
+    {
+      "source": "Watch 2",
+      "target": "Phone 3",
+      "context": [
+        {
+          "name": "Still",
+          "value": 22,
+          "dropoffvalue": 11
+        }
+      ],
+      "targetContext": [
+        {
+          "name": "MainActivity",
+          "value": 10
+        },
+        {
+          "name": "OpenListActivity",
+          "value": 12
+        }
+      ]
+    },
+
+    {
+      "source": "Tablet 1",
+      "target": "Phone 4",
+      "context": [
+        {
+          "name": "Still",
+          "value": 15,
+          "dropoffvalue": 7
+        }
+      ],
+      "targetContext": [
+        {
+          "name": "MainActivity",
+          "value": 5
+        },
+        {
+          "name": "OpenListActivity",
           "value": 10
         }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 6
-          }
-        ],
-        [
-          {
-            "name": "SettingsActivity",
-            "value": 4
-          }
-        ]
       ]
     },
-    {
-      "source": "Watch 1",
-      "target": "Phone 2",
-      "proportions": [
-        {
-          "name": "OpenListActivity",
-          "value": 61
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 30
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 21
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Tablet 1",
-      "target": "Watch 2",
-      "proportions": [
-        {
-          "name": "MainActivity",
-          "value": 5
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 5
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 0
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Tablet 1",
-      "target": "Phone 3",
-      "proportions": [
-        {
-          "name": "MainActivity",
-          "value": 15
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 5
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 10
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Watch 1",
-      "target": "Phone 2",
-      "proportions": [
-        {
-          "name": "MainActivity",
-          "value": 22
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 10
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 12
-          }
-        ]
-      ]
-    },
-    {
-      "source": "Watch 1",
-      "target": "Tablet 2",
-      "proportions": [
-        {
-          "name": "OpenListActivity",
-          "value": 5
-        }
-      ],
-      "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 2
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 3
-          }
-        ]
-      ]
-    },
+
     {
       "source": "Phone 2",
       "target": "Watch 3",
-      "proportions": [
+      "context": [
         {
-          "name": "MainActivity",
-          "value": 10
+          "name": "Walking",
+          "value": 15,
+          "dropoffvalue": 7
         }
       ],
       "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 5
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 5
-          }
-        ]
+        {
+          "name": "MainActivity",
+          "value": 5
+        },
+        {
+          "name": "OpenListActivity",
+          "value": 5
+        }
       ]
     },
     {
       "source": "Phone 2",
       "target": "Tablet 3",
-      "proportions": [
+      "context": [
         {
-          "name": "MainActivity",
-          "value": 2
+          "name": "Still",
+          "value": 11,
+          "dropoffvalue":8
         }
       ],
       "targetContext": [
-        [
-          {
-            "name": "MainActivity",
-            "value": 1
-          }
-        ],
-        [
-          {
-            "name": "OpenListActivity",
-            "value": 1
-          }
-        ]
+        {
+          "name": "MainActivity",
+          "value": 1
+        },
+        {
+          "name": "OpenListActivity",
+          "value": 1
+        }
       ]
     }
   ],
-  "nodes": [
-    {
-      "name": "Phone 1",
-      "id": 0,
-      "activities": [
-        {
-          "name": "walking",
-          "value": 26
-        },
-        {
-          "name": "on foot",
-          "value": 35
-        },
-        {
-          "name": "still",
-          "value": 10
-        }
-      ],
-      "xpos": 0
-    },
+    "nodes": [
+      {
+        "name": "Phone 1",
+        "id": 0,
+        "activities": [
+          {
+            "name": "Walking",
+            "value": 41
+          },
+          {
+            "name": "On Foot",
+            "value": 45
+          },
+          {
+            "name": "Still",
+            "value": 52
+          }
+        ],
+        "xpos": 0
+      },
     {
       "name": "Tablet 1",
       "id": 1,
       "activities": [
         {
-          "name": "walking",
+          "name": "Walking",
           "value": 5
         },
         {
-          "name": "on foot",
+          "name": "On Foot",
           "value": 2
         },
         {
-          "name": "still",
-          "value": 23
+          "name": "Still",
+          "value": 29
         }
       ],
       "xpos": 1
@@ -339,16 +277,16 @@
       "id": 2,
       "activities": [
         {
-          "name": "walking",
-          "value": 29
+          "name": "Walking",
+          "value": 47
         },
         {
-          "name": "on foot",
-          "value": 15
+          "name": "On Foot",
+          "value": 27
         },
         {
-          "name": "still",
-          "value": 3
+          "name": "Still",
+          "value": 22
         }
       ],
       "xpos": 1
@@ -358,12 +296,16 @@
       "id": 3,
       "activities": [
         {
-          "name": "walking",
-          "value": 12
+          "name": "Walking",
+          "value": 32
         },
         {
-          "name": "still",
-          "value": 15
+          "name": "Still",
+          "value": 31
+        },
+        {
+          "name": "On Foot",
+          "value": 20
         }
       ],
       "xpos": 2
@@ -371,12 +313,12 @@
     {
       "name": "Watch 2",
       "id": 4,
-      "xpos": 2
+      "xpos": 1
     },
     {
       "name": "Tablet 2",
       "id": 5,
-      "xpos": 2
+      "xpos": 1
     },
     {
       "name": "Phone 3",
@@ -384,14 +326,24 @@
       "xpos": 2
     },
     {
+      "name": "Phone 4",
+      "id": 6,
+      "xpos": 2
+    },
+    {
       "name": "Tablet 3",
       "id": 7,
-      "xpos": 3
+      "xpos": 1
     },
     {
       "name": "Watch 3",
       "id": 8,
       "xpos": 3
+    },
+    {
+      "name": "Watch 4",
+      "id": 8,
+      "xpos": 1
     }
   ]
 }

@@ -72,7 +72,7 @@ path.link {
 
 }
 .textpath {
-    font-size: 1.2em;
+    font-size: 1em;
 
 }
 path.link:hover{
@@ -141,6 +141,14 @@ div#chartLegend {
 
 #matrix-chart{
     display: none;
+}
+
+#chart-1 {
+    clear:right;
+}
+#stacked-chart {
+    clear: left;
+
 }
 #stacked-chart, #matrix-chart, #chart-1 {
     border: 1px solid rgba(215, 212, 212, 0.69);

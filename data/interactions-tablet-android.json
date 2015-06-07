@@ -2,7 +2,7 @@
     "links": [{
         "source": "Tablet",
         "target": "Watch",
-        "proportions": [{
+        "context": [{
             "name": "MainActivity",
             "value": 12
         }],
@@ -24,7 +24,7 @@
     }, {
         "source": "Tablet",
         "target": "Watch",
-        "proportions": [{
+        "context": [{
             "name": "OpenListActivity",
             "value": 10
         }],
@@ -41,7 +41,7 @@
     }, {
         "source": "Tablet",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "OpenListActivity",
             "value": 10
         }],
@@ -58,7 +58,7 @@
     }, {
         "source": "Tablet",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "MainActivity",
             "value": 16
         }],
@@ -75,7 +75,7 @@
     }, {
         "source": "Tablet",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "SettingsActivity",
             "value": 23
         }],

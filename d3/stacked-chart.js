@@ -6,34 +6,34 @@ function drawStackedChart(data) {
     data = [
         {
             androidActivity: "MainActivity",
-            walking: 32,
-            standing: 0,
-            still: 30,
-            "on foot": 0
+            Walking: 32,
+            "On Foot": 0,
+            Still: 30,
+            Unknown: 0
         },
         {
             androidActivity: "OpenListActivity",
-            walking: 16,
-            standing: 0,
-            still: 12,
-            "on foot": 10
+            Walking: 16,
+            "On Foot": 0,
+            Still: 12,
+            Unknown: 10
         },
 
         {
             androidActivity: "SettingsActivity",
-            walking: 3,
-            standing: 0,
-            still: 5,
-            "on foot": 1
+            Walking: 3,
+            "On Foot": 0,
+            Still: 5,
+            Unknown: 1
 
         },
 
         {
             androidActivity: "AddItemActivity",
-            walking: 3,
-            standing: 8,
-            still: 9,
-            "on foot": 1
+            Walking: 3,
+            "On Foot": 8,
+            Still: 9,
+            Unknown: 1
 
         }
 

@@ -1,6 +1,6 @@
 //
 // 
-//
+// 
 
 var colorNodes = d3.scale.category10();
 var colorLinks = d3.scale.category20c();
@@ -18,18 +18,18 @@ var devices = [{
     name: "Tablet"
 }];
 
-var userActivities = [{
-    name: "walking"
-}, {
-    name: "still"
-}, {
-    name: "on foot"
-}, {
-    name: "tilting"
-}, {
-    name: "unknown"
-}
-];
+//var userActivities = [{
+//    name: "walking"
+//}, {
+//    name: "still"
+//}, {
+//    name: "on foot"
+//}, {
+//    name: "tilting"
+//}, {
+//    name: "unknown"
+//}
+//];
 
 var androidActivities = [{
     name: "MainActivity"
@@ -44,8 +44,8 @@ var androidActivities = [{
 
 
 var colorLinks = d3.scale.ordinal()
-    .domain(["MainActivity", "OpenListActivity", "SettingsActivity"])
-    .range(colorbrewer.Blues[5]);
+    .domain(  ["Walking","On Foot", "Still", "Unknown"])
+    .range(colorbrewer.RdGy[6]);
 
 function selectChanged(i) {
     var deviceSelect = document.getElementById("device-" + i);
@@ -135,13 +135,9 @@ function createSankey(jsonPath, targetElementId) {
         data.nodes = dataZero.nodes;
         data.links = dataZero.links;
 
-        //.filter(function(d) {
-        //        if(d.source==="Phone 1")
-        //            return d;
-        //    }
-        //)
-
         data = updateData(data);
+
+        //debugger;
         /**
          * Stores link sum to target state, adds sourceId and target id properties to links
          */
@@ -150,8 +146,8 @@ function createSankey(jsonPath, targetElementId) {
                 var stateName = data.nodes[i].name;
                 // create new property for nodes and add up values from links
                 //  where ever this is the target state
-                data.nodes[i].proportions = [];
-                data.nodes[i].proportions.push({
+                data.nodes[i].context = [];
+                data.nodes[i].context.push({
                     "name": "summation",
                     "value": 0
                 });
@@ -160,11 +156,11 @@ function createSankey(jsonPath, targetElementId) {
                     var source = data.links[j].source;
                     var target = data.links[j].target;
                     if (target == stateName) {
-                        for (var k = 0; k < data.links[j].proportions.length; k++) {
-                            data.nodes[i].proportions[0].value += data.links[j].proportions[k].value;
+                        for (var k = 0; k < data.links[j].context.length; k++) {
+                            data.nodes[i].context[0].value += data.links[j].context[k].value;
                         }
                         data.links[j].targetID = i;
-                        //data.nodes[i].proportions[1].value += data.links[j].proportions[1].value;
+                        //data.nodes[i].context[1].value += data.links[j].context[1].value;
                     }
                     if (source == stateName) {
                         data.links[j].sourceID = i;
@@ -172,8 +168,8 @@ function createSankey(jsonPath, targetElementId) {
                 }
                 ;
                 // special case INIT state, is not targeted by any, so its gets a special group and color
-                //if( (data.nodes[i].proportions[0].value + data.nodes[i].proportions[1].value) == 0 ) {
-                //    data.nodes[i].proportions[3].value = 5; // INIT devices
+                //if( (data.nodes[i].context[0].value + data.nodes[i].context[1].value) == 0 ) {
+                //    data.nodes[i].context[3].value = 5; // INIT devices
                 //  }
 
             }
@@ -304,7 +300,7 @@ function createSankey(jsonPath, targetElementId) {
                 .innerRadius(0)
                 .outerRadius(function (d) {
                     var sum = d3.sum(d.sourceLinks, function (d) {
-                        return d.proportions[0].value;
+                        return d.context[0].value;
                     })
 
                     return 10;
@@ -323,26 +319,22 @@ function createSankey(jsonPath, targetElementId) {
                     return areNodesConnected(selectedNode, d);
                 })
                 .filter(function (d) {
-
                     var sum = d3.sum(d.sourceLinks, function (d) {
-                        return d.proportions[0].value;
+                        return d.context[0].value;
                     })
                     return d.value > 0 && (d.value - sum ) > 1;
                 })
                 .attr("fill", function (d, i) {
                     return "red";
                 })
-                .attr("opacity", 0.5)
                 .attr("d", arc)
                 .attr("transform", function (d) {
-
-
                     var sum = d3.sum(d.sourceLinks, function (d) {
-                        return d.proportions[0].value;
+                        return d.context[0].value;
                     })
 
                     var stroke = ( d.dy - ( sum * d.dy / d.value) );
-                    var x0 = d.x + d.dx
+                    var x0 = d.x + d.dx,
                     y0 = d.y + d.dy - stroke + 10;
 
                     return "translate(" + x0 + "," + y0 + " )";
@@ -361,33 +353,38 @@ function createSankey(jsonPath, targetElementId) {
                 })
                 .filter(function (d) {
                     var sum = d3.sum(d.sourceLinks, function (d) {
-                        return d.proportions[0].value;
+                        return d.context[0].value;
                     })
                     return d.value > 0 && (d.value - sum ) > 1;
                 })
-                .attr("opacity", 0.5)
-                .attr("stroke-width", 10)
-                .attr("stroke", "url(#line-gradient)")
-                .attr("x1", function (d) {
-                    var x0 = d.x + d.dx + 5;
+                //.attr("opacity", 0.5)
+                .attr("width", 10)
+                .attr("fill", "url(#line-gradient)")
+                .attr("x", function (d) {
+                    var x0 = d.x + d.dx;
                     return x0;
                 })
-                .attr("y1", function (d) {
+                .attr("y", function (d) {
                     var sum = d3.sum(d.sourceLinks, function (d) {
-                        return d.proportions[0].value;
+                        return d.context[0].value;
                     });
                     var stroke = ( d.dy - ( sum * d.dy / d.value) );
                     var y1 = d.y + d.dy - stroke + 10;
                     return y1;
                 })
-                .attr("x2", function (d) {
-                    var x0 = d.x + d.dx + 5;
-                    ;
-                    return x0;
-                })
-                .attr("y2", function (d) {
-                    var y1 = d.y + d.dy;
-                    return y1;
+                //.attr("x2", function (d) {
+                //    var x0 = d.x + d.dx + 5;
+                //    ;
+                //    return x0;
+                //})
+                .attr("height", function (d) {
+
+                    var sum = d3.sum(d.sourceLinks, function(_) {
+                        return _.dy;
+                    })
+
+                    var y1 =  d.dy;
+                    return d.dy-sum;
                 })
                 .style("visibility", function (d) {
                     return "visible";
@@ -407,7 +404,7 @@ function createSankey(jsonPath, targetElementId) {
                 .data(data.links)
                 .enter().append("path")
                 .attr("class", function (d) {
-                    return "link " + d.proportions[0].name;
+                    return "link " + d.context[0].name;
                 })
                 .attr("id", function (d, i) {
                     return "path_" + i;
@@ -417,10 +414,15 @@ function createSankey(jsonPath, targetElementId) {
                     return Math.max(1, d.dy);
                 })
                 .attr("stroke", function (d, i) {
-                    return colorLinks(d.proportions[0].name);
+                    return colorLinks(d.context[0].name);
                 })
                 .sort(function (a, b) {
                     return b.dy - a.dy;
+                })
+
+            var title = link.append("title")
+                .text(function(d) {
+                    return d.context[0].value;
                 });
 
             var linkText = group.selectAll(".linkText")
@@ -432,8 +434,7 @@ function createSankey(jsonPath, targetElementId) {
                 .append("textPath")
                 .attr("class", "textpath")
                 .text(function (d) {
-                    //return "Context: " + d.proportions[0].name + " " + d.source.name + " → " + d.target.name + "\n" + format(d.proportions[0].value);
-                    return format(d.proportions[0].value);
+                    return d.context[0].name;
                 })
                 .attr("xlink:href", function (d, i) {
                     return "#path_" + i;
@@ -450,7 +451,7 @@ function createSankey(jsonPath, targetElementId) {
             var dropOfflines = svg.selectAll(".dropofflines")
                 .data(data.nodes)
                 .enter()
-                .append("line")
+                .append("rect")
                 .attr("class", "dropoffline");
 
             dropOfflines
@@ -460,6 +461,7 @@ function createSankey(jsonPath, targetElementId) {
                     d3.select("#tooltipChart")
                         .style("visibility", "visible")
                         .style("left", d3.event.pageX + "px")
+                        //.attr("height", 50)
                         .style("top", d3.event.pageY + "px");
 
                 })
@@ -483,14 +485,14 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("transform", function (d) {
                     return "translate(" + d.x + "," + d.y + ")";
                 })
-                .call(d3.behavior.drag()
-                    .origin(function (d) {
-                        return d;
-                    })
-                    .on("dragstart", function () {
-                        this.parentNode.appendChild(this);
-                    })
-                    .on("drag", dragmove));
+                //.call(d3.behavior.drag()
+                //    .origin(function (d) {
+                //        return d;
+                //    })
+                //    .on("dragstart", function () {
+                //        this.parentNode.appendChild(this);
+                //    })
+                //    .on("drag", dragmove));
 
             /**
              * Displays node;
@@ -503,14 +505,8 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("width", sankey.nodeWidth())
                 .style("fill", function (d) {
                     return d.color = colorNodes(d.name.replace(/ .*/, ""));
-                })
-                //.style("stroke", function (d) {
-                //    return d3.rgb(d.color).brighter(0.4);
-                //})
-                .append("title")
-                .text(function (d) {
-                    return d.name + "\n" + format(d.value);
                 });
+
 
             /**
              * Display node value in center of node
@@ -585,15 +581,24 @@ function createSankey(jsonPath, targetElementId) {
              * Shows link name on hover
              */
             link
-                .on("mouseover", function (d) {
+                .on("click", function (d, i) {
+
+                    //debugger;
+
+                    d3.selectAll(".link")
+                        .style("stroke", function (d2, i) {
+                            return colorLinks(d2.context[0].name);
+                        });
 
 
-                    d3.select("#tooltipChart h2").html("Target Android Activities from " + d.proportions[0].name);
-                    showChartOnHover(d);
-                    d3.select("#tooltipChart")
-                        .style("visibility", "visible")
-                        .style("left", d3.event.pageX + "px")
-                        .style("top", d3.event.pageY + "px");
+                    t.stroke(colorLinks(d.context[0].name));
+                    svg.call(t);
+
+                    d3.select(this)
+                        .style("stroke", t.url());
+
+
+                    drawMatrix(d);
 
                 })
                 .on("mousemove", function () {
@@ -606,11 +611,25 @@ function createSankey(jsonPath, targetElementId) {
                 });
 
 
+
+
             node
                 .on("mouseover", function (d) {
 
-                    d3.select("#tooltipChart h2").html("Detected user activity");
-                    showActivitiesChartOnHover(d);
+                    /**
+                     *
+                     * temporary fix :) #324
+                     */
+                    d3.select("#tooltipChart h2").html(d.name);
+                   var p = d3.select("#tooltipChart p");
+                    p.html("Avg session time: 34.1s <br/> " +
+                    "Avg. # of interactions: 8.4 <br/> " +
+                    "Dropoff: 32/77")
+
+                    //d3.select("#tooltipChart svg").html();
+                    svgChart.selectAll("*").remove();
+
+                    //showActivitiesChartOnHover(d);
                     d3.select("#tooltipChart")
                         .style("visibility", "visible")
                         .style("left", d3.event.pageX + "px")
@@ -631,24 +650,24 @@ function createSankey(jsonPath, targetElementId) {
              * move path(link) as you drag node
              * @param d
              */
-            function dragmove(d) {
-
-                d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
-                groups.attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
-                sankey.relayout();
-                //debugger;
-                link.attr("d", path);
-
-            }
+            //function dragmove(d) {
+            //
+            //    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+            //    groups.attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+            //    sankey.relayout();
+            //    //debugger;
+            //    link.attr("d", path);
+            //
+            //}
 
         }
 
-        var tooltip = d3.select(".tooltipChart")
-            .append("div")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("visibility", "hidden")
-            .text("a simple tooltip");
+        //var tooltip = d3.select(".tooltipChart")
+        //    .append("div")
+        //    .style("position", "absolute")
+        //    .style("z-index", "10")
+        //    .style("visibility", "hidden")
+        //    .text("a simple tooltip");
 
         var padding = 28;
         var format2Number = d3.format(",.2f"),
@@ -662,13 +681,13 @@ function createSankey(jsonPath, targetElementId) {
             percentageFormat = d3.format("%");
 
         var margin = {
-                top: 30,
+                top: 150,
                 right: 100,
-                bottom: 20,
+                bottom: 50,
                 left: 40
             },
-            width = 800 - margin.left - margin.right,
-            height = 550 - margin.bottom - 90;
+            width = 900 - margin.left - margin.right,
+            height = 400 - margin.bottom;
 
         var svg = d3.select(targetElementId)
             .append("svg")
@@ -677,23 +696,35 @@ function createSankey(jsonPath, targetElementId) {
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        var sankey = d3.sankey().nodeWidth(30).nodePadding(padding).size([width, height - 100]);
+        var sankey = d3.sankey().nodeWidth(30).nodePadding(padding).size([width, height ]);
         var path = sankey.link();
 
+
+        var t = textures.lines()
+            .heavier(10)
+            .thinner(1.5);
+            //.size(16)
+            //.strokeWidth(8);
+            //.data([1,2,3])();
+        svg.call(t);
 
         var y = d3.scale.linear()
             .range([200, 0]);
 
         svg.append("defs")
-            .append("linearGradient")
+            .append("svg:linearGradient")
             .attr("id", "line-gradient")
-            .attr("gradientUnits", "userSpaceOnUse")
-            .attr("x1", 0).attr("y1", "0%")
-            .attr("x2", 0).attr("y2", "100%")
+            //.attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", "0%")
+            .attr("y1", "0%")
+            .attr("x2", "0%")
+            .attr("y2", "100%")
             .selectAll("stop")
             .data([
                 {offset: "0%", color: "red"},
-                {offset: "60%", color: "white"},
+                {offset: "40%", color: "red"},
+                //{offset: "75%", color: "red"},
+                //{offset: "90%", color: "white"},
                 {offset: "100%", color: "white"}
             ])
             .enter().append("stop")
@@ -702,7 +733,13 @@ function createSankey(jsonPath, targetElementId) {
             })
             .attr("stop-color", function (d) {
                 return d.color;
-            });
+            })
+            //.attr("start-opacity", function (d) {
+            //    return 1;
+            //})
+            //.attr("stop-opacity", function (d) {
+            //    return 1;
+            //});
 
 
         sankey
@@ -717,7 +754,7 @@ function createSankey(jsonPath, targetElementId) {
 
         //showContextBar(data.links[0]);
         //stack(data.links[0].targetContext);
-        var stack = d3.layout.stack();
+        //var stack = d3.layout.stack();
 
         // Add a group for each row of data
         var groups = svg.append("g").selectAll(".context")
@@ -738,21 +775,121 @@ function createSankey(jsonPath, targetElementId) {
 
         function showChartOnHover(link) {
 
-            var sum = d3.sum(link.targetContext, function (a) {
-                return a[0].value;
-            });
-
-            var yScale = d3.scale.linear()
-                .domain([0, sum])
-                .range([0, link.dy]);
-
-            var newdata = link.targetContext;
-
-            var newdata = newdata.map(function (obj) {
-                return obj[0];
-            });
+            //var sum = d3.sum(link.targetContext, function (a) {
+            //    return a.value;
+            //});
+            //
+            //var yScale = d3.scale.linear()
+            //    .domain([0, sum])
+            //    .range([0, link.dy]);
+            //var newdata = link.targetContext;
+               //
 
             svgChart.selectAll("*").remove();
+            svgChart
+                .transition()
+                .attr("height", 80)
+                .attr("width", 80);
+
+            //var pie = d3.layout.pie()
+            //    .sort(null)
+            //    .value(function (d) {
+            //        return d.value;
+            //    });
+
+            /**
+             * D3 arc helper for calculation of arcs parameters
+             */
+            //var arc = d3.svg.arc()
+            //    .outerRadius(40)
+            //    .innerRadius(0);
+            //
+            //var arcs = svgChart.append("g").selectAll("arc.nodes")
+            //    .data(pie(newdata))
+            //    .enter()
+            //    .append("g")
+            //    .attr("fill", "black")
+            //    .attr("r", function (d) {
+            //        return 20;
+            //    })
+            //    .attr("class", "arc")
+            //    .attr("transform", "translate(" + (40) + ", " + (40  ) + ")");
+            //
+            //
+            //arcs.append("path")
+            //    .attr("fill", function (d) {
+            //        return colorLinks(d.data.name);
+            //    })
+            //    .attr("d", arc);
+            //
+            //arcs.append("text")
+            //    .attr("transform", function (d) {
+            //        return "translate(" + arc.centroid(d) + ")";
+            //    })
+            //    .attr("dy", ".35em")
+            //    .style("text-anchor", "middle")
+            //    .text(function (d) {
+            //        return percentageFormat(d.value / sum);
+            //    });
+
+            /**
+             * Legend for tooltip piechart
+             */
+            //var legend = svgChart.append("g")
+            //    .selectAll("circle.legend")
+            //    .data(newdata)
+            //    .enter()
+            //    .append("g")
+            //    .attr("transform", function (d, i) {
+            //
+            //        d.x = 100,
+            //            d.y = i * 20 + 10;
+            //        return "translate(" + d.x + "," + d.y + ")";
+            //    });
+            //
+            //legend.append("circle")
+            //    .attr("fill", function (d) {
+            //        //debugger;
+            //        return colorLinks(d.name);
+            //    })
+            //    .attr("r", function (d) {
+            //        return 5;
+            //    });
+            //
+            //legend.append("text")
+            //    .text(function (d) {
+            //        return d.name + "(" + d.value + "/" + sum + ")";
+            //    })
+            //    .attr("x", function (d) {
+            //        return 10;
+            //    })
+            //    .attr("y", function (d) {
+            //        return 5;
+            //    });
+
+
+        }
+
+
+        /**
+         * Shows activities pie chart at a node
+         * @param node
+         */
+
+        function showActivitiesChartOnHover(node) {
+
+
+            var sum = d3.sum(node.activities, function (a) {
+                return a.value;
+            });
+
+return;
+            var newdata = node.activities;
+            svgChart.selectAll("*").remove();
+//debugger;
+            svgChart
+                .transition()
+                .attr("height", 80);
 
             var pie = d3.layout.pie()
                 .sort(null)
@@ -829,33 +966,79 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("y", function (d) {
                     return 5;
                 });
-
-
         }
 
+        function showDropoff(node) {
 
-        /**
-         * Shows activities pie chart at a node
-         * @param node
-         */
+            //debugger;
+            //var sum = d3.sum(node.sourceLinks, function (d) {
+            //    return d.context[0].dropoffvalue;
+            //});
+            //
+            ////var newdata = node.activities;
+            //
+            //
+            //
+            //svgChart.selectAll("*").remove();
+            //svgChart
+            //    .transition()
+            //    .attr("height", 20);
+            //
+            //svgChart
+            //    .append("text")
+            //    .attr("height", "100px")
+            //    .attr("transform", function (d) {
+            //        return "translate( 10 , 10)";
+            //    })
+            //    //.attr("dy", "3em")
+            //    .style("text-anchor", "left")
+            //    .text(function (d) {
+            //
+            //        var part = node.value-sum;
+            //        var per = percentageFormat(part/(sum+part));
+            //
+            //        return part + " of total "+ (sum+part) + " ("+per+")";
+            //    });
 
-        function showActivitiesChartOnHover(node) {
 
 
-            var sum = d3.sum(node.activities, function (a) {
-                return a.value;
+            var sum = d3.sum(node.sourceLinks, function (d){
+                return d.context[0].dropoffvalue;
             });
 
+            // combines same context from different device switches
+            var nest = d3.nest()
+                .key(function(d) {
+                    return d.context[0].name})
+                .entries(node.sourceLinks);
 
-            var newdata = node.activities;
-            svgChart.selectAll("*").remove();
+            nest.map(function (d) {
+                d.value = d3.sum(d.values, function(el) {
+                    return el.context[0].dropoffvalue;
+                });
+                return d;
+            });
+            //console.log(nest)
+
+
+
+            var newdata = nest;
+
+            d3.selectAll("#tooltipChart p").html("");
+            svgChart.selectAll("*").remove()
+            //
+            //svgChart
+            //    .transition()
+            //    .attr("height", 80);
+
 
             var pie = d3.layout.pie()
                 .sort(null)
                 .value(function (d) {
+                    //debugger;
                     return d.value;
                 });
-
+    //debugger;
             /**
              * D3 arc helper for calculation of arcs parameters
              */
@@ -877,7 +1060,8 @@ function createSankey(jsonPath, targetElementId) {
 
             arcs.append("path")
                 .attr("fill", function (d) {
-                    return colorNodes(d.data.name);
+                    //debugger;
+                    return colorLinks(d.data.key);
                 })
                 .attr("d", arc);
 
@@ -888,7 +1072,8 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("dy", ".35em")
                 .style("text-anchor", "middle")
                 .text(function (d) {
-                    return percentageFormat(d.value / sum);
+                    //debugger;
+                    return percentageFormat( d.value / sum);
                 });
 
             /**
@@ -909,7 +1094,7 @@ function createSankey(jsonPath, targetElementId) {
             legend.append("circle")
                 .attr("fill", function (d) {
                     //debugger;
-                    return colorNodes(d.name);
+                    return colorLinks(d.key);
                 })
                 .attr("r", function (d) {
                     return 5;
@@ -917,7 +1102,8 @@ function createSankey(jsonPath, targetElementId) {
 
             legend.append("text")
                 .text(function (d) {
-                    return d.name + "(" + d.value + "/" + sum + ")";
+                    //debugger;
+                    return d.key + "(" + d.value + "/" + sum + ")";
                 })
                 .attr("x", function (d) {
                     return 10;
@@ -925,44 +1111,23 @@ function createSankey(jsonPath, targetElementId) {
                 .attr("y", function (d) {
                     return 5;
                 });
-        }
 
-        function showDropoff(node) {
-
-            var sum = d3.sum(node.sourceLinks, function (a) {
-                return a.proportions[0].value;
-            });
-
-            var newdata = node.activities;
-            svgChart.selectAll("*").remove();
-
-            svgChart
-                .append("text")
-                .attr("height", "100px")
-                .attr("transform", function (d) {
-                    return "translate( 10 , 10)";
-                })
-                .attr("dy", ".35em")
-                .style("text-anchor", "middle")
-                .text(function (d) {
-                    return node.value-sum;
-                });
         }
 
 
-        var hideTooltip = function () {
-            // Hide the tooltip
-            var tooltip = d3.select("#tooltip")
-                .style("visibility", "hidden");
-
-        };
+        //var hideTooltip = function () {
+        //    // Hide the tooltip
+        //    var tooltip = d3.select("#tooltip")
+        //        .style("visibility", "hidden");
+        //
+        //};
 
         function transform(d) {
             return "translate(" + d.x + "," + d.y + ")";
         }
 
         function calcRadius(d) {
-            var sum = getProportions(d).reduce(add, 0);
+            var sum = getcontext(d).reduce(add, 0);
             return sum;
         }
 
@@ -975,7 +1140,7 @@ function createSankey(jsonPath, targetElementId) {
 
 //createLegend("#chartLegend",devices, colorNodes);
 //createLegend("#chartLegend",userActivities, colorLinks);
-createLegend("#chartLegend", androidActivities, colorLinks);
+//createLegend("#chartLegend", userActivities, colorLinks);
 createSankey("data/interactions-phone-android.json", "#chart-1");
 //createSankey("data/interactions-watch-user.json" , "#chart-2");
 

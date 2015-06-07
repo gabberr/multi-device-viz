@@ -2,7 +2,7 @@
     "links": [{
         "source": "Tablet",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "still",
             "value": 61
         }],
@@ -20,7 +20,7 @@
     }, {
         "source": "Tablet",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "on foot",
             "value": 3
         }],
@@ -33,7 +33,7 @@
     }, {
         "source": "Tablet",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "tilting",
             "value": 32
         }],
@@ -51,7 +51,7 @@
     }, {
         "source": "Tablet",
         "target": "Watch",
-        "proportions": [{
+        "context": [{
             "name": "still",
             "value": 10
         }],
@@ -68,7 +68,7 @@
     }, {
         "source": "Tablet",
         "target": "Watch",
-        "proportions": [{
+        "context": [{
             "name": "tilting",
             "value": 13
         }],

@@ -569,9 +569,9 @@ d3.sankey = function() {
   }
   function getLinkValue(link) {
     var sum = 0;
-    if(link.proportions === undefined)
+    if(link.context === undefined)
       debugger;
-    link.proportions.forEach(function (p ){
+    link.context.forEach(function (p ){
       sum+= p.value;
     });
     if(link.context) {

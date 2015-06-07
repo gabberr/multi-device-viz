@@ -1,7 +1,7 @@
 function drawMatrix(data) {
 
 
-    var margin = {top: 120, right: 10, bottom: 50, left: 200},
+    var margin = {top: 120, right: 10, bottom: 80, left: 200},
         width = 240,
         height = 240;
 

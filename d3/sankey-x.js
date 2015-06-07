@@ -275,6 +275,12 @@ d3.sankey = function() {
         }
 
         function ascendingDepth(a, b) {
+
+            /**
+             * Keep same devices together
+             */
+
+            return b.name.localeCompare(a.name);
             return a.y - b.y;
         }
     }

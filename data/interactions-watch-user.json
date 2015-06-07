@@ -2,7 +2,7 @@
     "links": [{
         "source": "Watch",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "walking",
             "value": 61
         }],
@@ -24,7 +24,7 @@
     }, {
         "source": "Watch",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "on foot",
             "value": 35
         }],
@@ -45,7 +45,7 @@
     }, {
         "source": "Watch",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "still",
             "value": 10
         }],
@@ -59,7 +59,7 @@
     }, {
         "source": "Watch",
         "target": "Tablet",
-        "proportions": [{
+        "context": [{
             "name": "on foot",
             "value": 10
         }],
@@ -76,7 +76,7 @@
     }, {
         "source": "Watch",
         "target": "Tablet",
-        "proportions": [{
+        "context": [{
             "name": "walking",
             "value": 13
         }],

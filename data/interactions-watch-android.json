@@ -2,7 +2,7 @@
     "links": [{
         "source": "Watch",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "MainActivity",
             "value": 38
         }],
@@ -21,7 +21,7 @@
     }, {
         "source": "Watch",
         "target": "Phone",
-        "proportions": [{
+        "context": [{
             "name": "OpenListActivity",
             "value": 20
         }],
@@ -38,7 +38,7 @@
     }, {
         "source": "Watch",
         "target": "Tablet",
-        "proportions": [{
+        "context": [{
             "name": "OpenListActivity",
             "value": 10
         }],
